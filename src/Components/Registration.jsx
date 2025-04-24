@@ -1,27 +1,75 @@
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 
 function Form() {
-    // const[name, setName] = useState('')
-    // useEffect(() => {
-    //     alert('Registration successful')
-    // })
+    const[data, setData] = useState({
+        FirstName: '',
+        LastName: '',
+        email: '',
+        district: '',
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setData((prev) => ({
+          ...prev,
+          [name]: value,
+        }));
+      };
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Form submitted:', data);
+        alert('Registration successful');
+
+        setData({
+            FirstName: '',
+            LastName: '',
+            email: '',
+            district: '',
+          });
+      };
+
+
+      
+
+      const isFormValid = data.FirstName && data.LastName && data.email && data.district;
+
+
   return (
     <div className='form rounded-xl m-5'>
+        <form onSubmit={handleSubmit}>
         <input type="text"
+        name='FirstName'
         placeholder='First name'
+        value={data.FirstName}
+        onChange={handleChange}
         className='border border-black m-5 p-3 w-72'
+        required
         />
 
         <input type="text"
+        name='LastName'
         placeholder='Last name'
+        value={data.LastName}
+        onChange={handleChange}
         className='border border-black m-5 p-3 w-72 '
+        required
         />
 
         <input type='email'
+        name='email'
         placeholder='exapmle@gmai.com'
+        value={data.email}
+        onChange={handleChange}
         className='border border-black m-5 p-3 w-72 '
+        required
         />
-        <select name="district" id="district" className="w-48 p-2">
+        <select 
+        name="district" 
+        id="district" 
+        value={data.district}
+        onChange={handleChange}
+        className="w-48 p-2">
             <option value="Bugesera">Bugesera</option>
             <option value="Burera">Burera</option>
             <option value="Gakenke">Gakenke</option>
@@ -55,8 +103,9 @@ function Form() {
         </select>
 
 
-        <button className='bg-teal-500 rounded-lg text-white w-48 m-5 p-2 hover:bg-white hover:text-black'>Register</button>
+        <button type='submit' disabled={!isFormValid} className='bg-teal-500 rounded-lg text-white w-48 m-5 p-2 hover:bg-white hover:text-black'>Register</button>
 
+        </form>
 
     </div>
   )
