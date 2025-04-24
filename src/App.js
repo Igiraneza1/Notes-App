@@ -1,10 +1,12 @@
 import './App.css';
-import NotesApp from './Components/NotesApp';
+import Form from './Components/Form';
+import Header from './Components/Header';
 
 function App() {
   return (
     <div className="App">
-      <NotesApp/>
+      <Header/>
+      <Form/>
     </div>
   );
 }
